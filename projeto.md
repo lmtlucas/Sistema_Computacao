@@ -1,7 +1,13 @@
 # Rede social local para comunidade universitária
 
 ## 1. Contexto
-Sistema: Rede social local para comunidade universitária (Total de usúarios 10.000. Picos de 2.000 acessos em 10 min).
+Sistema: Rede social localpara a comunidade universitária, onde alunos e professores podem compartilhar posts, imagens, eventos e interagir por meio de curtidas e comentários. O sistema possui cerca de 10.000 usuários cadastrados, onde pode atingir picos de até 2.000 acessos em 10 minutos em períodos de grande movimentação, como divulgação de eventos ou início de semestre/mátricula.
+
+Funções:
+- Criar posts com textos, imagens e links
+- Curtir e comentar publicações
+- Divulgar eventos universitários
+- Troca de mensagens com outros usuarios
 
 ## 2. Requisitos
 CPU: Processador Multi-core 2 vCPUs no backend para lidar com requisições concorrentes e não bloquear a Main Thread.
@@ -12,8 +18,34 @@ SO: Linux (Ubuntu Server)
 
 ## 3. Diagnóstico da Falha
 
+Incidente 1 – Erro 404 na Nuvem (Arquivos)
 
-Incidentes 1 a 10
+Sintoma:
+No feed da rede social as imagens de posts aparecem no PC do desenvolvedor, mas no servidor Linux(produção) ficam quebradas.
+
+Análise:
+No servidor Linux o nome dos arquivos e caminhos precisam ser exatamente iguais aos usados no código.
+
+Causa raiz:
+Uso de caminho absoluto do Windows ou diferença de maiúsculas/minúsculas no Linux é case-sensitive o que pode ser o problema.
+
+
+Incidente 2 – Acesso Negado 403
+
+Sintoma:
+O usuário tenta baixar uma imagem ou arquivo da rede social, mas o sistema retorna erro 403 (acesso negado).
+
+Análise:  
+O servidor está tentando salvar arquivos em uma pasta onde ele não possui permissão de escrita.
+
+Causa raiz:
+O servidor não tem permissão de leitura ou escrita na pasta utilizada pela aplicação.
+
+
+
+
+
+Incidentes 3 a 10
 
 Sintoma: 
 Análise: 
