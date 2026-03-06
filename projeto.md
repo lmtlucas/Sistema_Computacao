@@ -18,7 +18,7 @@ SO: Linux (Ubuntu Server)
 
 ## 3. Diagnóstico da Falha
 
-Incidente 1 – Erro 404 na Nuvem (Arquivos)
+- Incidente 1 – Erro 404 na Nuvem (Arquivos)
 
 Sintoma:
 No feed da rede social as imagens de posts aparecem no PC do desenvolvedor, mas no servidor Linux(produção) ficam quebradas.
@@ -30,7 +30,7 @@ Causa raiz:
 Uso de caminho absoluto do Windows ou diferença de maiúsculas/minúsculas no Linux é case-sensitive o que pode ser o problema. 
 
 
-Incidente 2 – Acesso Negado 403
+- Incidente 2 – Acesso Negado 403
 
 Sintoma:
 O usuário tenta baixar uma imagem ou arquivo da rede social, mas o sistema retorna erro 403 (acesso negado).
@@ -42,36 +42,40 @@ Causa raiz:
 O servidor não tem permissão de leitura ou escrita na pasta utilizada pela aplicação.
 
 
-Incidente 3 – Falta de DNS
+- Incidente 3 – Falta de DNS
 
 Sintoma: 
-A equipe comprou o domínio .com.br, mas quando os primeiros usuários tentam acessar pelo nome, a página diz "Servidor não encontrado", embora funcione se digitarem o IP.
+A equipe comprou o domínio redesocialefg.com.br, mas quando os primeiros usuários tentam acessar pelo nome, a página diz "Servidor não encontrado", embora funcione se digitarem o IP.
 
 Análise:
 O serviço de DNS precisa estar vinculado e apontado para o endereço IP do servidor 
 
 Causa Raiz:
-A equipe comprou o dominio mas não configurou o serviço para aporntar o nome ao IP do servidor
+A equipe comprou o dominio mas não configurou o serviço para apontar o nome ao IP do servidor
 
 
-Incidente 4 – Timeout no Ônibus
+- Incidente 4 – Timeout no Ônibus
 
 Sintoma:
 O app funciona bem no Wi-Fi da faculdade. Mas no 3G, o app trava na tela de carregamento sem avisar nada ao usuário.
 
 Análise:
+A baixa velocidade e a menor banda da rede movel está causando um alta latência que causou um timeout na requisição e o App não possui nenhum tratamento para mostrar ao usuario que a pagina está carregando e que travou devido a demora ou fala de conexão com a rede.
 
 Causa Raiz:
+O desenvolvedor não considerou a latência da rede 3G na otimização do codigo para diminuir o tempo de processamento e a compressão de imagens e arquivos para reduzir o tempo de resposta. Além de não ter criado um tratamento de erro Timeout para avisar o usuario da falha no carregamento.
+
 
 Incidentes 5 - A Panela Derretendo
 
 Sintoma: 
-Uma tela com muitas imagens em alta resolução faz os celulares de entrada esquentarem muito, a navegação fica lenta e o app fecha sozinho.
+A tela do perfil contendo muitas imagens em alta resolução faz os celulares de entrada esquentarem muito, a navegação fica lenta e o app fecha sozinho.
 
 Análise: 
+O alto uso do CPU para renderizar essas imagens está causando um aquecimento no celular, as imagens grandes estão sendo descombrimidas todas de uma vez causando uma falta de memória que causou o fechamento do app e a navegação ficou lenta porque a alta quantidade de dados das imagens estão sendo baixadas.
 
 Causa Raiz:
-
+A desenvolvedor não aplicou uma compressão e otimização das imagem para diminuir o processamento na renderização da página e não utilizou o lazy loading, para que as imagens sejam carregadas sob demanda
 
 Incidentes 6 - A Interface Congelada
 
