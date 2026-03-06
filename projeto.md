@@ -66,7 +66,7 @@ Causa Raiz:
 O desenvolvedor não considerou a latência da rede 3G na otimização do codigo para diminuir o tempo de processamento e a compressão de imagens e arquivos para reduzir o tempo de resposta. Além de não ter criado um tratamento de erro Timeout para avisar o usuario da falha no carregamento.
 
 
-Incidentes 5 - A Panela Derretendo
+- Incidentes 5 - A Panela Derretendo
 
 Sintoma: 
 A tela do perfil contendo muitas imagens em alta resolução faz os celulares de entrada esquentarem muito, a navegação fica lenta e o app fecha sozinho.
@@ -77,32 +77,45 @@ O alto uso do CPU para renderizar essas imagens está causando um aquecimento no
 Causa Raiz:
 A desenvolvedor não aplicou uma compressão e otimização das imagem para diminuir o processamento na renderização da página e não utilizou o lazy loading, para que as imagens sejam carregadas sob demanda
 
-Incidentes 6 - A Interface Congelada
 
-Sintoma: Ao pesquisar algo ou aplicar um filtro, a tela do celular "congela" por 4 segundos. Os botões não respondem aos toques.
+- Incidentes 6 - A Interface Congelada
+
+Sintoma: Ao pesquisar algum usúario ou aplicar um filtro, a tela do celular "congela" por 4 segundos. Os botões não respondem aos toques.
+
 Análise: 
+A interface está rodando Thread principal e a função de busca e filtros, por serem complexas, estão demorando muito tempo para serem processadas 
+
 Causa Raiz:
+O desenvolvedor não otimizou a função javascript e não usou programação assíncrona para enviar tarefas demoradas para fora do main thread para mante a tela fluida
 
 
-Incidentes 7 - Amnésia Digital 
+- Incidentes 7 - Amnésia Digital 
 
-Sintoma: O usuário preenche metade de um formulário e minimiza o app para olhar o WhatsApp. Ao voltar, o app recarrega do zero e ele perde tudo.
+Sintoma: O usuário preenche metade de uma postagem e minimiza o app para olhar o WhatsApp. Ao voltar, o app recarrega do zero e ele perde tudo.
+
 Análise: 
+O App não está armazenando locamente ou no servidor o preenchimento das postagens, 
+
 Causa Raiz:
+Não existe nenhum sistema para persistencia dos dados preenchidos pelo usuario seja como armazenamento remoto no servidor, que poderia armazenar como rascunho a postagem, ou como armazenamento local no cache do navegador ou bano de dados internos no mobile, por exemplo utilizando SQLite.
 
 
-Incidentes 8 - Vazamento de Memória 
-
+- Incidentes 8 - Vazamento de Memória 
 
 Sintoma: O app possui um feed infinito. Quanto mais o usuário rola a tela, mais lento o celular fica, até o aplicativo dar Crash após 10 minutos.
 
-Análise: 
-Causa Raiz:
+Análise: O app está acumulando na memória RAM todo o feed ja exibido esquecendo de avisar o SO para apagar as memórias que já não precisa mais. Causando Memory Leak que faz o SO fechar o app para preservar a RAM.
 
-Incidentes 9 - Gargalo de Disco 
+Causa Raiz:
+Houve má gestão da memória onde o desenvolvedor não programou a liberação da memoria dos dados que já não estão mais sendo utilizados
+
+
+- Incidentes 9 - Gargalo de Disco 
 
 Sintoma: O servidor na nuvem é barato e usa disco HDD. Em momentos de pico, o processador (CPU) fica ocioso, mas o sistema fica muito lento para ler/gravar dados.
+
 Análise: 
+
 Causa Raiz:
 
 Incidentes 10 - Conflito de Deploy 
@@ -125,6 +138,7 @@ Justificativa:
 3) Otimização: Arquivos estáticos servidos via Cache, poupando processamento de CPU do servidor principal.
 - Upgrade de memória (RAM) para 16GB. Necessário para evitar que o SO acione a Memória Virtual (Swap) durante o pico.
 - Upgrade para SSD NVMe evitar gargalos de I/O na gravação das matrículas.
+- upgrade para 2TB de armazenamento para gravar rascunhos 
 
 
 
