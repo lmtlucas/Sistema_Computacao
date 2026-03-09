@@ -155,6 +155,8 @@ Otimização:
 Para melhorar o desempenho e a estabilidade do sistema serão aplicadas algumas melhorias de infraestrutura e otimização do código:
 
 - Uso de cache para arquivos estáticos, diminuindo o número de acessos ao servidor.
+  
+- Upgrade Processador Multi-core 16 vCPUs aumentando a capacidade de processamento para lidar com requisições concorrentes e evitar bloquear a Main Thread.
 
 - Upgrade da memória RAM para 16GB, aumentando o espaço disponível para processamento e evitando que o Sistema Operacional precise utilizar memória virtual (Swap).
 
