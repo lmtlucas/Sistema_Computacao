@@ -138,9 +138,10 @@ Diferença entre o ambiente de desenvolvimento e o ambiente do servidor.
 
 
 ## 4. Arquitetura Proposta
+
 Ambiente:
 
-O sistema será executado em um servidor Linux (Ubuntu Server) na nuvem utilizando containers Docker como ambiente de execução. Isso garante que o sistema funcione da mesma forma no ambiente de desenvolvimento e produção, evitando o problema conhecido como “na minha máquina funciona”.
+O sistema será executado em um servidor Linux (Ubuntu Server) na nuvem, utilizando containers Docker como ambiente de execução. O uso da nuvem permitirá maior disponibilidade, escalabilidade e facilidade de manutenção, já que os recursos do servidor poderão ser ampliados conforme o crescimento do número de usuários. Onde os containers Docker garantirão que o sistema funcione da mesma forma no ambiente de desenvolvimento e produção, evitando o problema conhecido como “na minha máquina funciona”.
 
 Isolamento:
 
