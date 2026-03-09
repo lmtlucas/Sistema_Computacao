@@ -112,21 +112,25 @@ Houve má gestão da memória onde o desenvolvedor não programou a liberação 
 
 - Incidentes 9 - Gargalo de Disco 
 
-Sintoma: O servidor na nuvem é barato e usa disco HDD. Em momentos de pico, o processador (CPU) fica ocioso, mas o sistema fica muito lento para ler/gravar dados.
+Sintoma:
+Durante picos de acesso, o sistema fica lento mesmo com a CPU pouco utilizada.
 
-Análise: 
+Análise:
+O servidor demora para ler e gravar dados no armazenamento.
 
-Causa Raiz:
+Causa raiz:
+O uso de disco HDD cria lentidão nas operações de leitura e escrita.
 
 Incidentes 10 - Conflito de Deploy 
 
-Sintoma: O código foi feito usando uma versão moderna de uma linguagem, mas o servidor da nuvem tem uma versão antiga instalada, quebrando o sistema inteiro ao tentar subir o código.
-Análise: 
-Causa Raiz:
+Sintoma:
+O sistema funciona no computador do desenvolvedor, mas apresenta erro ao ser executado no servidor.
 
+Análise:
+A versão da linguagem ou das dependências no servidor é diferente da usada no desenvolvimento.
 
-
-
+Causa raiz:
+Diferença entre o ambiente de desenvolvimento e o ambiente do servidor.
 
 
 
