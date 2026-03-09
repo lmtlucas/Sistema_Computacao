@@ -138,18 +138,35 @@ Diferença entre o ambiente de desenvolvimento e o ambiente do servidor.
 
 
 ## 4. Arquitetura Proposta
-Ambiente: Em vez de um servidor Bare-metal monolítico, usaremos Containers (Docker) na Nuvem com um Load Balancer (Balanceador de Carga).
-Justificativa: 
-1) Isolamento: Docker garante o mesmo ambiente do desenvolvimento.
-2) Escalabilidade: O Load Balancer distribui os alunos entre 5 containers menores. Se a RAM de um subir, cria-se outro.
-3) Otimização: Arquivos estáticos servidos via Cache, poupando processamento de CPU do servidor principal.
-- Upgrade de memória (RAM) para 16GB. Mais espaço para o armazenamento durante o processamento das funcionalidades do app. Necessário para evitar que o SO acione a Memória Virtual (Swap) durante o pico.
-- Upgrade para SSD NVMe evitar gargalos de I/O na gravação das matrículas e leitura de dados do usuário.
-- Upgrade para 2TB de armazenamento SSD para gravar rascunhos de postagens aumentando a persistência dos dados inserido pelo usuário
-- Otimização e tratamento de arquivos de imagens para formato WEBP, padronizando tamanhos para evitar sobrecarga de download de dados e processamento de imagens
-- Otimização de do codigo para implementar tratamento de erros, gestão de memória com liberação dos dados antigos da memória, programação assíncrona para executar tarefas pesadas fora da *main thread*, lazy loading, que permite carregar imagens apenas quando necessário.
+Ambiente:
 
+O sistema será executado em um servidor Linux (Ubuntu Server) na nuvem utilizando containers Docker como ambiente de execução. Isso garante que o sistema funcione da mesma forma no ambiente de desenvolvimento e produção, evitando o problema conhecido como “na minha máquina funciona”.
 
+Isolamento:
+
+A aplicação será separada em diferentes containers, como o servidor da aplicação e o banco de dados. Isso ajuda a evitar conflitos entre dependências e facilita a manutenção do sistema.
+
+Escalabilidade:
+Para suportar picos de até 2.000 acessos em poucos minutos, será utilizado um Load Balancer para distribuir as requisições entre múltiplas instâncias da aplicação, evitando sobrecarga em um único servidor.
+
+Otimização:
+
+Para melhorar o desempenho e a estabilidade do sistema serão aplicadas algumas melhorias de infraestrutura e otimização do código:
+
+- Uso de cache para arquivos estáticos, diminuindo o número de acessos ao servidor.
+
+- Upgrade da memória RAM para 16GB, aumentando o espaço disponível para processamento e evitando que o Sistema Operacional precise utilizar memória virtual (Swap).
+
+- Upgrade do armazenamento para SSD NVMe de 2TB, melhorando a velocidade de leitura e gravação dos dados e evitando gargalos de I/O, além de oferecer mais espaço para armazenar imagens, arquivos e rascunhos de postagens dos usuários.
+
+- Otimização de imagens para formato WEBP, padronizando tamanho e resolução para reduzir consumo de banda e processamento.
+
+- Otimização do código da aplicação, incluindo:
+
+	- tratamento de erros de rede e requisições
+	- melhor gestão de memória, liberando dados antigos da RAM
+	-uso de programação assíncrona para executar tarefas pesadas fora da Main Thread
+	-utilização de lazy loading para carregar imagens apenas quando necessário.
 
 
 
