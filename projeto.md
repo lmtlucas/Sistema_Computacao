@@ -21,22 +21,21 @@ SO: Linux (Ubuntu Server)
 - Incidente 1 – Erro 404 na Nuvem (Arquivos)
 
 Sintoma:
-No feed da rede social as imagens de posts aparecem no PC do desenvolvedor, mas no servidor Linux(produção) ficam quebradas.
+No feed da rede social, as imagens dos posts aparecem no computador do desenvolvedor, mas no servidor Linux (produção) ficam quebradas.
 
 Análise:
-No servidor Linux o nome dos arquivos e caminhos precisam ser exatamente iguais aos usados no código. Necessario usar caminhos relativos para evitar problemas.
+No servidor Linux, o nome dos arquivos e os caminhos precisam ser exatamente iguais aos usados no código. Também é necessário utilizar caminhos relativos para evitar problemas entre diferentes sistemas operacionais.
 
 Causa raiz:
-Uso de caminho absoluto do Windows ou diferença de maiúsculas/minúsculas no Linux é case-sensitive o que pode ser o problema. 
-
+Uso de caminho absoluto do Windows ou diferença entre letras maiúsculas e minúsculas, já que o Linux é *case-sensitive*.
 
 - Incidente 2 – Acesso Negado 403
 
 Sintoma:
 O usuário tenta baixar uma imagem ou arquivo da rede social, mas o sistema retorna erro 403 (acesso negado).
 
-Análise:  
-O servidor está tentando salvar arquivos em uma pasta onde ele não possui permissão de escrita.
+Análise:
+O servidor está tentando salvar ou acessar arquivos em uma pasta onde não possui permissão de escrita.
 
 Causa raiz:
 O servidor não tem permissão de leitura ou escrita na pasta utilizada pela aplicação.
@@ -44,73 +43,77 @@ O servidor não tem permissão de leitura ou escrita na pasta utilizada pela apl
 
 - Incidente 3 – Falta de DNS
 
-Sintoma: 
-A equipe comprou o domínio redesocialefg.com.br, mas quando os primeiros usuários tentam acessar pelo nome, a página diz "Servidor não encontrado", embora funcione se digitarem o IP.
+Sintoma:
+A equipe comprou o domínio redesocialefg.com.br, mas quando os usuários tentam acessar pelo nome, aparece a mensagem “Servidor não encontrado”, embora funcione quando digitam o endereço IP.
 
 Análise:
-O serviço de DNS precisa estar vinculado e apontado para o endereço IP do servidor 
+O serviço de DNS precisa estar configurado e apontando corretamente para o endereço IP do servidor.
 
-Causa Raiz:
-A equipe comprou o dominio mas não configurou o serviço para apontar o nome ao IP do servidor
+Causa raiz:
+O domínio foi comprado, mas não foi configurado para direcionar o nome do site para o IP do servidor.
 
 
 - Incidente 4 – Timeout no Ônibus
 
 Sintoma:
-O app funciona bem no Wi-Fi da faculdade. Mas no 3G, o app trava na tela de carregamento sem avisar nada ao usuário.
+O aplicativo funciona normalmente no Wi-Fi da faculdade, mas no 3G trava na tela de carregamento sem informar nada ao usuário.
 
 Análise:
-A baixa velocidade e a menor banda da rede movel está causando um alta latência que causou um timeout na requisição e o App não possui nenhum tratamento para mostrar ao usuario que a pagina está carregando e que travou devido a demora ou fala de conexão com a rede.
+A baixa velocidade e a menor largura de banda da rede móvel causam alta latência. Isso gera timeout nas requisições e o aplicativo não possui tratamento adequado para informar ao usuário sobre a demora ou falha de conexão.
 
-Causa Raiz:
-O desenvolvedor não considerou a latência da rede 3G na otimização do codigo para diminuir o tempo de processamento e a compressão de imagens e arquivos para reduzir o tempo de resposta. Além de não ter criado um tratamento de erro Timeout para avisar o usuario da falha no carregamento.
-
-
-- Incidentes 5 - A Panela Derretendo
-
-Sintoma: 
-A tela do perfil contendo muitas imagens em alta resolução faz os celulares de entrada esquentarem muito, a navegação fica lenta e o app fecha sozinho.
-
-Análise: 
-O alto uso do CPU para renderizar essas imagens está causando um aquecimento no celular, as imagens grandes estão sendo descombrimidas todas de uma vez causando uma falta de memória que causou o fechamento do app e a navegação ficou lenta porque a alta quantidade de dados das imagens estão sendo baixadas.
-
-Causa Raiz:
-A desenvolvedor não aplicou uma compressão e otimização das imagem para diminuir o processamento na renderização da página e não utilizou o lazy loading, para que as imagens sejam carregadas sob demanda
+Causa raiz:
+O desenvolvedor não considerou a latência da rede 3G na otimização do código, nem aplicou compressão de imagens e arquivos para reduzir o tempo de resposta. Também não foi implementado tratamento de erro para timeout.
 
 
-- Incidentes 6 - A Interface Congelada
+- Incidente 5 – A Panela Derretendo
 
-Sintoma: Ao pesquisar algum usúario ou aplicar um filtro, a tela do celular "congela" por 4 segundos. Os botões não respondem aos toques.
+Sintoma:
+A tela do perfil contendo muitas imagens em alta resolução faz os celulares de entrada esquentarem muito, a navegação fica lenta e o aplicativo fecha sozinho.
 
-Análise: 
-A interface está rodando Thread principal e a função de busca e filtros, por serem complexas, estão demorando muito tempo para serem processadas 
+Análise:
+O alto uso de CPU para renderizar as imagens causa aquecimento no dispositivo. Além disso, as imagens grandes são descomprimidas ao mesmo tempo, consumindo muita memória RAM e deixando o aplicativo lento.
 
-Causa Raiz:
-O desenvolvedor não otimizou a função javascript e não usou programação assíncrona para enviar tarefas demoradas para fora do main thread para mante a tela fluida
-
-
-- Incidentes 7 - Amnésia Digital 
-
-Sintoma: O usuário preenche metade de uma postagem e minimiza o app para olhar o WhatsApp. Ao voltar, o app recarrega do zero e ele perde tudo.
-
-Análise: 
-O App não está armazenando locamente ou no servidor o preenchimento das postagens, 
-
-Causa Raiz:
-Não existe nenhum sistema para persistencia dos dados preenchidos pelo usuario seja como armazenamento remoto no servidor, que poderia armazenar como rascunho a postagem, ou como armazenamento local no cache do navegador ou bano de dados internos no mobile, por exemplo utilizando SQLite.
+Causa raiz:
+O desenvolvedor não aplicou compressão e otimização das imagens e também não utilizou lazy loading, que permite carregar imagens apenas quando necessário.
 
 
-- Incidentes 8 - Vazamento de Memória 
+- Incidente 6 – A Interface Congelada
 
-Sintoma: O app possui um feed infinito. Quanto mais o usuário rola a tela, mais lento o celular fica, até o aplicativo dar Crash após 10 minutos.
+Sintoma:
+Ao pesquisar algum usuário ou aplicar filtros, a tela do celular congela por cerca de 4 segundos e os botões não respondem.
 
-Análise: O app está acumulando na memória RAM todo o feed ja exibido esquecendo de avisar o SO para apagar as memórias que já não precisa mais. Causando Memory Leak que faz o SO fechar o app para preservar a RAM.
+Análise:
+A interface está rodando na thread principal, e as funções de busca e filtros estão demorando muito tempo para serem processadas.
 
-Causa Raiz:
-Houve má gestão da memória onde o desenvolvedor não programou a liberação da memoria dos dados que já não estão mais sendo utilizados
+Causa raiz:
+O desenvolvedor não otimizou a função JavaScript e não utilizou programação assíncrona para executar tarefas pesadas fora da *main thread*.
 
 
-- Incidentes 9 - Gargalo de Disco 
+- Incidente 7 – Amnésia Digital
+
+Sintoma:
+O usuário começa a escrever uma postagem, minimiza o aplicativo para olhar o WhatsApp e, ao voltar, o app recarrega e todo o conteúdo digitado é perdido.
+
+Análise:
+O aplicativo não está armazenando localmente ou no servidor o conteúdo digitado pelo usuário.
+
+Causa raiz:
+Não existe um sistema de persistência de dados para salvar rascunhos da postagem, seja em armazenamento remoto no servidor ou armazenamento local no dispositivo (como cache do navegador ou banco de dados local, por exemplo SQLite).
+
+
+- Incidente 8 – Vazamento de Memória
+
+Sintoma:
+O aplicativo possui um feed infinito. Quanto mais o usuário rola a tela, mais lento o celular fica até o aplicativo travar após alguns minutos.
+
+Análise:
+O aplicativo está acumulando na memória RAM todo o conteúdo já exibido no feed e não está liberando a memória que não é mais necessária.
+
+Causa raiz:
+Má gestão de memória pelo desenvolvedor, que não programou a liberação dos dados antigos da memória, causando memory leak.
+
+
+- Incidente 9 – Gargalo de Disco
 
 Sintoma:
 Durante picos de acesso, o sistema fica lento mesmo com a CPU pouco utilizada.
@@ -119,19 +122,19 @@ Análise:
 O servidor demora para ler e gravar dados no armazenamento.
 
 Causa raiz:
-O uso de disco HDD cria lentidão nas operações de leitura e escrita.
+O uso de disco HDD causa lentidão nas operações de leitura e escrita.
 
-Incidentes 10 - Conflito de Deploy 
+
+- Incidente 10 – Conflito de Deploy
 
 Sintoma:
 O sistema funciona no computador do desenvolvedor, mas apresenta erro ao ser executado no servidor.
 
 Análise:
-A versão da linguagem ou das dependências no servidor é diferente da usada no desenvolvimento.
+A versão da linguagem ou das dependências no servidor é diferente da utilizada no ambiente de desenvolvimento.
 
 Causa raiz:
 Diferença entre o ambiente de desenvolvimento e o ambiente do servidor.
-
 
 
 ## 4. Arquitetura Proposta
