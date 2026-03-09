@@ -119,7 +119,7 @@ Sintoma:
 Durante picos de acesso, o sistema fica lento mesmo com a CPU pouco utilizada.
 
 Análise:
-O servidor demora para ler e gravar dados no armazenamento.
+O servidor demora para ler e gravar dados no armazenamento em disco rigido HDD.
 
 Causa raiz:
 O uso de disco HDD causa lentidão nas operações de leitura e escrita.
@@ -131,7 +131,7 @@ Sintoma:
 O sistema funciona no computador do desenvolvedor, mas apresenta erro ao ser executado no servidor.
 
 Análise:
-A versão da linguagem ou das dependências no servidor é diferente da utilizada no ambiente de desenvolvimento.
+A versão da linguagem ou das dependências no servidor é diferente da utilizada no ambiente de desenvolvimento, provavelmente porque não foi utilizado um docker para garantir as mesmas configurações.
 
 Causa raiz:
 Diferença entre o ambiente de desenvolvimento e o ambiente do servidor.
@@ -143,9 +143,11 @@ Justificativa:
 1) Isolamento: Docker garante o mesmo ambiente do desenvolvimento.
 2) Escalabilidade: O Load Balancer distribui os alunos entre 5 containers menores. Se a RAM de um subir, cria-se outro.
 3) Otimização: Arquivos estáticos servidos via Cache, poupando processamento de CPU do servidor principal.
-- Upgrade de memória (RAM) para 16GB. Necessário para evitar que o SO acione a Memória Virtual (Swap) durante o pico.
-- Upgrade para SSD NVMe evitar gargalos de I/O na gravação das matrículas.
-- upgrade para 2TB de armazenamento para gravar rascunhos 
+- Upgrade de memória (RAM) para 16GB. Mais espaço para o armazenamento durante o processamento das funcionalidades do app. Necessário para evitar que o SO acione a Memória Virtual (Swap) durante o pico.
+- Upgrade para SSD NVMe evitar gargalos de I/O na gravação das matrículas e leitura de dados do usuário.
+- Upgrade para 2TB de armazenamento SSD para gravar rascunhos de postagens aumentando a persistência dos dados inserido pelo usuário
+- Otimização e tratamento de arquivos de imagens para formato WEBP, padronizando tamanhos para evitar sobrecarga de download de dados e processamento de imagens
+- Otimização de do codigo para implementar tratamento de erros, gestão de memória com liberação dos dados antigos da memória, programação assíncrona para executar tarefas pesadas fora da *main thread*, lazy loading, que permite carregar imagens apenas quando necessário.
 
 
 
