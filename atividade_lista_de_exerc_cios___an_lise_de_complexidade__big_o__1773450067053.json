@@ -1,0 +1,191 @@
+{
+  "id": 17,
+  "title": "Lista de Exercícios – Análise de Complexidade (Big-O)",
+  "content": {
+    "ops": [
+      {
+        "attributes": {
+          "color": "#1f2937",
+          "bold": true
+        },
+        "insert": "Questão 01"
+      },
+      {
+        "attributes": {
+          "header": 4
+        },
+        "insert": "\n"
+      },
+      {
+        "insert": " O(1)\nPorque com Big-O O(1) temos uma constante, independente da quantidade de dados o tempo de execução é o mesmo\n\n"
+      },
+      {
+        "attributes": {
+          "color": "#1f2937",
+          "bold": true
+        },
+        "insert": "Questão 02"
+      },
+      {
+        "attributes": {
+          "header": 4
+        },
+        "insert": "\n"
+      },
+      {
+        "insert": " Big-O O(1)\nPorque ele não precisa percorrer os elementos, basta adicionar um ultimo índice \n\n"
+      },
+      {
+        "attributes": {
+          "color": "#1f2937",
+          "bold": true
+        },
+        "insert": "Questão 03"
+      },
+      {
+        "attributes": {
+          "header": 4
+        },
+        "insert": "\n"
+      },
+      {
+        "insert": "O(n) linear, quantidade de tempo aumenta proporcionalmente com a quantidade de dados\na) 10\nb) 1000\n"
+      },
+      {
+        "attributes": {
+          "color": "#1f2937",
+          "bold": true
+        },
+        "insert": "Questão 04"
+      },
+      {
+        "attributes": {
+          "header": 4
+        },
+        "insert": "\n"
+      },
+      {
+        "insert": "O(n)\nSe o alvo for o ultimo item da lista ele terá percorrido a lista toda, sendo este o pior caso\n\n"
+      },
+      {
+        "attributes": {
+          "color": "#1f2937",
+          "bold": true
+        },
+        "insert": "Questão 05"
+      },
+      {
+        "attributes": {
+          "header": 4
+        },
+        "insert": "\n"
+      },
+      {
+        "insert": "O(n)\nPorque o loop for não esta um dentro do outro, nesse caso ele imprime uma primeira vez e depois imprime outra, o tempo depende proporcionalmente do numero de dados impressão \n\n"
+      },
+      {
+        "attributes": {
+          "color": "#1f2937",
+          "bold": true
+        },
+        "insert": "Questão 06"
+      },
+      {
+        "attributes": {
+          "header": 4
+        },
+        "insert": "\n"
+      },
+      {
+        "insert": "O(n²) exponencial, quantidade de tempo aumenta exponencialmente com a quantidade de dados\n5**2 = 25 processos\n"
+      },
+      {
+        "attributes": {
+          "header": 4
+        },
+        "insert": "\n"
+      },
+      {
+        "attributes": {
+          "color": "#1f2937",
+          "bold": true
+        },
+        "insert": "Questão 07"
+      },
+      {
+        "attributes": {
+          "header": 4
+        },
+        "insert": "\n"
+      },
+      {
+        "insert": "O(n²)\nPorque o loop for dentro de outro loop for , seleciona um elemento e na sequencia seleciona outro elemento para comparar , como em uma coordenada.\n\n"
+      },
+      {
+        "attributes": {
+          "color": "#1f2937",
+          "bold": true
+        },
+        "insert": "Questão 08"
+      },
+      {
+        "attributes": {
+          "header": 4
+        },
+        "insert": "\n"
+      },
+      {
+        "insert": "O(log n)\no código vai eliminando a metade que não corresponde a comparação, no caso maior ou menor. Para funcionar a lista deve der como característica ser ordenada.\n\n"
+      },
+      {
+        "attributes": {
+          "color": "#1f2937",
+          "bold": true
+        },
+        "insert": "Questão 09"
+      },
+      {
+        "attributes": {
+          "header": 4
+        },
+        "insert": "\n"
+      },
+      {
+        "insert": "O(1) e O(n), sendo então O(n)\nPorque a constante acaba sendo insignificante diante o crescimento proporcional da complexidade O(n)\n\n"
+      },
+      {
+        "attributes": {
+          "color": "#1f2937",
+          "bold": true
+        },
+        "insert": "Questão 10"
+      },
+      {
+        "attributes": {
+          "header": 4
+        },
+        "insert": "\n"
+      },
+      {
+        "insert": "O(n²)\n1000² = 1000000\n\n"
+      },
+      {
+        "attributes": {
+          "color": "#1f2937",
+          "bold": true
+        },
+        "insert": "Questão 11"
+      },
+      {
+        "attributes": {
+          "header": 4
+        },
+        "insert": "\n"
+      },
+      {
+        "insert": "\n\na)4 iterações sendo os prints apresentando :1,2,4,8\nb) \n"
+      }
+    ]
+  },
+  "timestamp": "2026-03-14T01:01:07.047Z"
+}
